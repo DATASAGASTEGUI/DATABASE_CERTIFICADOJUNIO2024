@@ -1,0 +1,51 @@
+/*
+(01) MOSTRAR TODOS LOS DOCUMENTOS DE LA COLECCION ALUMNO
+*/
+
+use("campusfp")
+db.alumno.find()
+
+// MOSTRAR SOLO LAS CLAVES IDALUMNO, NOMBRE
+
+use("campusfp")
+db.alumno.find(
+   {},                                 //CONDICION
+   {idAlumno: 1, nombre: 1, _id: 0}    //QUE CAMPOS QUIERO QUE SE MUESTRE
+)
+
+/*
+(02) MOSTRAR EL DOCUMENTO CON IDALUMNO IGUAL A3
+*/
+
+use("campusfp")
+db.alumno.find(
+   {idAlumno: "A3"},                                 //CONDICION
+   {idAlumno: 1, estatura: 1, _id: 0}    //QUE CAMPOS QUIERO QUE SE MUESTRE
+)
+
+/*
+(03) MOSTRAR TODOS LOS DOCUMENTOS CON NOMBRE IGUAL A LUIS
+*/
+
+use("campusfp")
+db.alumno.find(
+   {nombre: "Luis"},                                 //CONDICION
+   {idAlumno: 1, nombre: 1, estatura: 1, _id: 0}    //QUE CAMPOS QUIERO QUE SE MUESTRE
+)
+
+/*
+(04) MOSTRAR LA CANTIDAD DE ALUMNOS
+*/
+
+use("campusfp")
+db.alumno.find().count()
+
+/*
+(05) CUANTOS DOCUMENTOS CON EL NOMBRE LUIS HAY
+*/
+
+use("campusfp")
+db.alumno.find(
+   {nombre: "Luis"},                                 //CONDICION
+   {idAlumno: 1, nombre: 1, estatura: 1, _id: 0}    //QUE CAMPOS QUIERO QUE SE MUESTRE
+).count()

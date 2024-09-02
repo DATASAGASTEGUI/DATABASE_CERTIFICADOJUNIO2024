@@ -1,0 +1,178 @@
+-- PROCEDURE = PROCEDIMIENTO = CONJUNTO INSTRUCCIONES SQL
+
+-- OBTENER LA FECHA DE NACIMIENTO DEL ALUMNO
+DELIMITER //
+CREATE PROCEDURE obtener_fecha_nacimiento(IN idAlumno_i INT, OUT fecha_nacimiento_o DATE)
+BEGIN
+   -- CUERPO DEL PROCEDURE
+   DECLARE id_v INT;
+   -- SET id_v = idAlumno_i;
+   -- CONSULTA
+   SELECT fecha_nacimiento INTO fecha_nacimiento_o FROM Alumno WHERE idAlumno = idAlumno_i;
+END //
+DELIMITER ;
+
+-- LLAMAR AL PROCEDURE
+SET @fecha_nacimiento = '';
+CALL obtener_fecha_nacimiento(5,  @fecha_nacimiento);
+SELECT @fecha_nacimiento;
+
+DROP PROCEDURE obtener_fecha_nacimiento;
+-- CREAR UN PROCEDURE PARA SUMAR DOS NUMEROS.
+DROP PROCEDURE IF EXISTS sumar_dos_numeros;
+DELIMITER $$
+CREATE PROCEDURE sumar_dos_numeros(IN n1_i INT, IN n2_i INT)
+BEGIN
+   DECLARE suma_v INT;
+   SET suma_v = n1_i + n2_i;
+   SELECT suma_v;
+END $$
+DELIMITER ;
+
+-- LLAMAR AL PROCEDURE
+
+CALL sumar_dos_numeros(5,9);
+
+-- MODIFICAR EL PROCEDURE ANTERIOR PARA QUE RETORNE LA SUMA
+
+DROP PROCEDURE IF EXISTS sumar_dos_numeros_1;
+DELIMITER $$
+CREATE PROCEDURE sumar_dos_numeros_1(IN n1_i INT, IN n2_i INT, OUT suma_o INT)
+BEGIN
+   SET suma_o = n1_i + n2_i;
+END $$
+DELIMITER ;
+
+-- LLAMAR PROCEDURE
+SET @suma = '';
+CALL sumar_dos_numeros_1(5,8,@suma);
+SELECT @suma AS SUMA;
+SELECT CONCAT('Suma de dos números: ', @suma) AS RESULTADO;
+
+-- USAR UN CONDICIONAL EN UN PROCEDURE
+-- CREAR UN PROCEDURE PARA EVALUAR UN NUMERO POSITIVO O NEGATIVO
+
+DROP PROCEDURE IF EXISTS evaluar_numero;
+DELIMITER $$
+CREATE PROCEDURE evaluar_numero(IN numero INT, OUT mensaje VARCHAR(100))
+BEGIN
+  IF numero > 0 THEN
+     SET mensaje = CONCAT('El número ', numero, ' es positivo'); 
+  ELSE
+     SET mensaje = CONCAT('El número ', numero, ' es negativo'); 
+  END IF;
+END $$
+DELIMITER ;
+
+SET @mensaje = '';
+CALL evaluar_numero(-45, @mensaje);
+SELECT @mensaje AS RESULTADO;
+
+-- CREAR UN PROCEDURE QUE GENERE UNA SERIE 1 ... N
+-- DONDE N SE LE PASA COMO PARAMETRO DE ENTRADA
+-- N=3   1 2 3  SUMA= 6
+DROP PROCEDURE IF EXISTS mostrar_serie;
+DELIMITER $$
+CREATE PROCEDURE mostrar_serie(IN n INT)
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   WHILE i <= n DO -- VERDADERO ENTRA EN EL BUCLE, FALSO TERMINA
+       SELECT i;
+       SET i = i + 1;
+   END WHILE;
+END $$
+DELIMITER ;
+-- LLAMAR AL PROCEDURE
+CALL mostrar_serie(5);
+
+-- VERSIONA CONCATENAR RESULTADO
+
+DROP PROCEDURE IF EXISTS mostrar_serie_1;
+DELIMITER $$
+CREATE PROCEDURE mostrar_serie_1(IN n INT, OUT sumaSerie INT)
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   DECLARE suma INT DEFAULT 0;
+   DECLARE salida VARCHAR(50) DEFAULT '';
+   WHILE i <= n DO -- VERDADERO ENTRA EN EL BUCLE, FALSO TERMINA
+       -- SELECT i; 
+       SET salida = CONCAT(salida,CONCAT(i,' ')); -- salida = salida + i
+       SET suma = suma + i;
+       SET i = i + 1;
+   END WHILE;
+   SET sumaSerie = suma;
+   SELECT salida;
+END $$
+DELIMITER ;
+
+SET @sumaSerie = '';
+CALL mostrar_serie_1(5, @sumaSerie);
+SELECT @sumaSerie;
+
+-- PROCEDURE SIN PARAMETROS DE ENTRADA NI SALIDA
+
+DROP PROCEDURE IF EXISTS mostrar_serie_2;
+DELIMITER $$
+CREATE PROCEDURE mostrar_serie_2()
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   WHILE i <= 5 DO 
+      SELECT i;
+	  SET i = i + 1;
+   END WHILE;
+END $$
+DELIMITER ;
+
+CALL mostrar_serie_2();
+
+-- HACER UN PROCEDURE CALCULADORA    IN(5 6     +, *, -, /) OUT resultado
+DROP PROCEDURE IF EXISTS calculadora;
+DELIMITER $$
+CREATE PROCEDURE calculadora(IN n1 INT, IN n2 INT,IN operacion CHAR(1),OUT resultado DOUBLE) 
+BEGIN
+    SET resultado = CASE
+        WHEN operacion = '+' THEN n1 + n2    
+		WHEN operacion = '-' THEN n1 - n2
+        WHEN operacion = '*' THEN n1 * n2
+        WHEN operacion = '/' THEN 
+           CASE
+             WHEN n2 <> 0 THEN
+                n1 / n2
+             ELSE
+                NULL
+		   END
+	END;
+END $$
+DELIMITER ;
+   
+CALL calculadora(5,0,'/',@resultado);
+SELECT @resultado;
+
+-- CURSOR  =   ResultSet rs          while(rs.next()) { ... }
+
+
+DROP PROCEDURE IF EXISTS ejemplo_cursor;
+DELIMITER $$
+CREATE PROCEDURE ejemplo_cursor()
+BEGIN
+   -- 1. CREAR Y LLENAR EL CURSOR
+   DECLARE alumno_cursor CURSOR FOR
+	 SELECT idAlumno, nombre, apellidos FROM Alumno WHERE grupo = 'dam';
+   -- 2. MANEJO DE EXCEPCION DEL CURSOR
+   DECLARE CONTINUE HANDLER FOR NOT FOUND SET hecho = TRUE;
+    
+   DROP TABLE IF EXISTS TAlumnoDam;
+   CREATE TABLE TAlumnoDam(
+      idAlumno   INT         NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      nombre     VARCHAR(25) NOT NULL,
+      apellidos  VARCHAR(50) NOT NULL
+   );
+   -- INSERT INTO TAlumno (nombre,apellidos) VALUES ('Luis','Adriana Luna');
+   
+   
+   
+END $$
+DELIMITER ;
+
+CALL ejemplo_cursor();
+SELECT * FROM TAlumno;

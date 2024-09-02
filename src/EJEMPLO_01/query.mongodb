@@ -1,0 +1,78 @@
+/*
+(01) MOSTRAR TODOS LOS DOCUMENTOS DE LA COLECCION TRABAJADOR
+*/
+
+use("fabrica")
+db.trabajador.find()
+
+// MOSTRAR SOLO LOS CAMPOS IDTRABAJADOR, NOMBRE
+
+use("fabrica")
+db.trabajador.find(
+    {},
+    {
+      idTrabajador: 1,
+      nombre: 1,
+      _id: 0
+    }
+)
+
+/*
+(02) MOSTRAR TODOS LOS DOCUMENTOS DE LA COLECCION TRABAJADOR CUYA
+     DIRECCION ESTE EN LA CIUDAD DE TRUJILLO
+*/
+use("fabrica")
+db.trabajador.find(
+    {
+      "direcciones.ciudad": "Trujillo"
+    }
+)
+
+// MOSTRAR SOLO LOS CAMPOS IDTRABAJADOR, NOMBRE 
+
+use("fabrica")
+db.trabajador.find(
+    {
+      "direcciones.ciudad": "Trujillo"
+    },
+    {
+      idTrabajador: 1,
+      nombre: 1,
+      _id: 0
+    }
+)
+
+/*
+(03) INSERTAR UN TRABAJADOR
+*/
+
+// PERMITIDO
+
+use("fabrica")
+db.trabajador.insertOne(
+{
+    "idTrabajador": 1,
+    "nombre": "Delly",
+    "edad": 22,
+    "sueldo": 1200.54,
+    "direcciones": [{"Calle": "De La Sierva", "numero": 123, "ciudad": "Trujillo"}, {"Calle": "Alberto Guzman", "numero": 894, "ciudad": "Trujillo"}],
+    "telefonos": ["634649847", "645234123"],
+    "emails": ["miguel.a@hotmail.com", "miguel.b@gmail.com"],
+    "jobis": ["Futbol", "Televisión"]
+})
+
+// NO PERMITIDO
+
+use("fabrica")
+db.trabajador.createIndex({"idTrabajador": 1}, {unique: true})// Clave primaria para 
+db.trabajador.insertOne(
+  {
+      "idTrabajador": 1,
+      "nombre": "Delly",
+      "edad": 22,
+      "sueldo": 1200.54,
+      "direcciones": [{"Calle": "De La Sierva", "numero": 123, "ciudad": "Trujillo"}, {"Calle": "Alberto Guzman", "numero": 894, "ciudad": "Trujillo"}],
+      "telefonos": ["634649847", "645234123"],
+      "emails": ["miguel.a@hotmail.com", "miguel.b@gmail.com"],
+      "jobis": ["Futbol", "Televisión"]
+  })

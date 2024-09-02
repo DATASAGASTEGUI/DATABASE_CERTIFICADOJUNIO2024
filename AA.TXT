@@ -1,0 +1,173 @@
+-- -----------------------------------------------------
+-- Schema BDESCUELA
+-- -----------------------------------------------------
+DROP DATABASE IF EXISTS BDESCUELA;
+CREATE SCHEMA IF NOT EXISTS BDESCUELA DEFAULT CHARACTER SET utf8 ;
+USE BDESCUELA ;
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.profesor
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS profesor (
+  DNI INT               NOT NULL PRIMARY KEY,
+  nombre VARCHAR(45)    NOT NULL,
+  direccion VARCHAR(45) NOT NULL,
+  teléfono INT          NOT NULL
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.modulo
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS modulo (
+  código INT         NOT NULL PRIMARY KEY,
+  nombre VARCHAR(45) NOT NULL
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.grupo
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS grupo (
+  alumnos INT NOT NULL PRIMARY KEY
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.curso
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS curso (
+  delegado INT      NOT NULL,
+  grupo_alumnos INT NOT NULL,
+  modulo_código INT NOT NULL,
+  PRIMARY KEY (delegado, grupo_alumnos),
+  CONSTRAINT fk_curso_grupo1
+    FOREIGN KEY (grupo_alumnos)
+    REFERENCES BDESCUELA.grupo (alumnos)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_curso_modulo1
+    FOREIGN KEY (modulo_código)
+    REFERENCES BDESCUELA.modulo (código)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.alumno
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS alumno (
+  n_de_expediente INT    NOT NULL PRIMARY KEY,
+  nombre VARCHAR(45)      NOT NULL,
+  apellidos VARCHAR(45)   NOT NULL,
+  fecha_nacimiento DATE   NOT NULL,
+  curso_delegado INT      NOT NULL,
+  grupo_alumnos INT       NOT NULL,
+  CONSTRAINT fk_alumno_curso1
+    FOREIGN KEY (curso_delegado)
+    REFERENCES curso (delegado)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_alumno_grupo1
+    FOREIGN KEY (grupo_alumnos)
+    REFERENCES grupo (alumnos)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.alumno_has_modulo
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS alumno_has_modulo (
+  alumno_n_de_expediente INT  NOT NULL,
+  modulo_código INT           NOT NULL,
+  PRIMARY KEY (alumno_n_de_expediente, modulo_código),
+  CONSTRAINT fk_alumno_has_modulo_alumno1
+    FOREIGN KEY (alumno_n_de_expediente)
+    REFERENCES BDESCUELA.alumno (n_de_expediente)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_alumno_has_modulo_modulo1
+    FOREIGN KEY (modulo_código)
+    REFERENCES modulo (código)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table BDESCUELA.profesor_has_modulo
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS profesor_has_modulo (
+  profesor_DNI INT NOT NULL,
+  modulo_código INT NOT NULL,
+  PRIMARY KEY (profesor_DNI, modulo_código),
+  CONSTRAINT fk_profesor_has_modulo_profesor1
+    FOREIGN KEY (profesor_DNI)
+    REFERENCES profesor (DNI)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_profesor_has_modulo_modulo1
+    FOREIGN KEY (modulo_código)
+    REFERENCES modulo (código)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)ENGINE = InnoDB;
+
+-- CREAR REGISTROS DE TABLA
+
+INSERT INTO profesor (DNI, nombre, direccion, teléfono) VALUES
+(12345678, 'Juan Pérez', 'Calle Falsa 123', 987654321),
+(87654321, 'Ana García', 'Av. Siempreviva 742', 912345678);
+
+INSERT INTO modulo (código, nombre) VALUES
+(1, 'Matemáticas'),
+(2, 'Lengua'),
+(3, 'Historia');
+
+INSERT INTO grupo (alumnos) VALUES
+(101),
+(102),
+(103);
+
+INSERT INTO curso (delegado, grupo_alumnos, modulo_código) VALUES
+(1, 101, 1),
+(2, 102, 2),
+(3, 103, 3);
+
+INSERT INTO alumno (n_de_expediente, nombre, apellidos, fecha_nacimiento, curso_delegado, grupo_alumnos) VALUES
+(1001, 'Carlos López', 'Fernández', '2002-05-14', 1, 101),
+(1002, 'María Rodríguez', 'Sánchez', '2003-08-21', 2, 102),
+(1003, 'Luis Martínez', 'Gómez', '2001-12-09', 3, 103);
+
+INSERT INTO alumno_has_modulo (alumno_n_de_expediente, modulo_código) VALUES
+(1001, 1),
+(1002, 2),
+(1003, 3);
+
+INSERT INTO profesor_has_modulo (profesor_DNI, modulo_código) VALUES
+(12345678, 1),
+(87654321, 2),
+(12345678, 3);
+
+-- CONSULTAS
+-- CURSOS QUE ENSEÑA UN PROFESOR
+
+SELECT p.nombre AS Profesor, m.nombre AS Modulo, c.delegado, c.grupo_alumnos
+FROM profesor p
+JOIN profesor_has_modulo phm ON p.DNI = phm.profesor_DNI
+JOIN modulo m ON phm.modulo_código = m.código
+JOIN curso c ON m.código = c.modulo_código
+WHERE p.DNI = 12345678;  -- Aquí pones el DNI del profesor
+
+-- MOSTRAR LOS GRUPOS EXISTEN
+SELECT alumnos FROM grupo ;
+
+-- MOSTRAR LOS ALUMNOS MATRICULADOS POR ASIGNATURA
+
+SELECT a.n_de_expediente AS Expediente, a.nombre AS Nombre, a.apellidos AS Apellidos, m.nombre AS Modulo
+FROM alumno a
+JOIN alumno_has_modulo ahm ON a.n_de_expediente = ahm.alumno_n_de_expediente
+JOIN modulo m ON ahm.modulo_código = m.código ;

@@ -1,0 +1,101 @@
+/*
+(01) MOSTRAR TODOS LOS DOCUMENTOS
+*/
+
+use("campusfp")
+db.alumno.find()
+
+/*
+(02) ELIMINAR EL DOCUMENOT CON _ID IGUAL A 5
+*/
+
+use("campusfp")
+db.alumno.deleteOne(
+    {
+        _id: 5
+    }
+)
+
+/*
+(03) ELIMINAR TODOS LOS DOCUMENTOS CON NOMBRE LUIS
+*/
+
+use("campusfp")
+db.alumno.deleteMany(
+    {
+        nombre: "Luis"
+    }
+)
+
+/*
+(04) MODIFICAR EL NOMBRE DEL DOCUMENTO _ID CON "A2" PONERLE MARIA
+*/
+
+use("campusfp")
+db.alumno.updateOne(
+    {_id: "A2"},
+    {
+        $set: {nombro: "María"}
+    }
+)
+
+/*
+(05) ELIMINAR UN CAMPO
+*/
+
+use("campusfp")
+db.alumno.updateOne(
+    {_id: "A2"}, 
+    { 
+        $unset: { nombro: "" } // Operación: elimina el campo 'nombro'
+    } 
+)
+
+/*
+(06) AÑADIR LA CLAVE JOBIS CON LOS SIGUIENTES DATOS
+     ["Futbol","Ajedrez","Lectura"] AL DOCUMENTO
+     CON _ID IGUAL "A2"
+*/
+
+use("campusfp")
+db.alumno.updateOne(
+    {_id: "A2"},
+    {
+        $set: {jobis: ["Futbol","Ajedrez","Lectura"]}
+    }
+)
+
+/*
+(07) MOSTRAR LOS DOCUMENTOS QUE TENGAN EL JOBI "LECTURA"
+*/
+
+use("campusfp")
+db.alumno.find(
+    {
+      jobis: "Lectura"  
+    },
+    {
+       _id: 1, nombre: 1 
+    }
+)
+
+/*
+(08) CANTIDAD DE DOCUMENTOS DE LA COLECCION ALUMNO
+*/
+
+use("campusfp")
+db.alumno.find().count();
+
+/*
+(09) INSERTAR UN DOCUMENTO CON A6
+*/
+
+use("campusfp")
+db.alumno.insertOne(
+    {
+       _id: "A6",
+       nombre: "Miguel",
+       edad: 23,
+       estatura: 1.72
+    }
+)
