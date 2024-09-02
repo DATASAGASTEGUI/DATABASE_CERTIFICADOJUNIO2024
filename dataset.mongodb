@@ -1,0 +1,29 @@
+use("campusfp")
+
+db.alumno.drop()
+
+db.alumno.insertOne(
+    {
+       idAlumno: "A1",
+       nombre: "Miguel",
+       edad: 23,
+       estatura: 1.72
+    }
+)
+
+db.alumno.insertMany(
+   [
+      {idAlumno: "A2", nombre: "Luis"},
+      {idAlumno: "A3", estatura: 1.72}
+   ]
+)
+
+db.alumno.insertOne(
+    {
+       idAlumno: "A4",
+       nombre: "Luis",
+       edad: 23,
+       estatura: 1.72
+    }
+)
+

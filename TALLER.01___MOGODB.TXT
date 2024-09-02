@@ -1,0 +1,163 @@
+-------------------------
+EJEMPLO DE UN OBJETO JSON
+-------------------------
+
+{
+  "idAlumno": "A001",
+  "nombre": "Juan",
+  "edad": 28
+}
+
+----------------------------------
+EJEMPLO DE ARREGLO DE OBJETOS JSON
+----------------------------------
+
+[
+  {
+    "idAlumno": "A001",
+	"nombre": "Juan",
+    "edad": 28
+  },
+  {
+    "idAlumno": "A002",
+    "nombre": "Maria",
+    "edad": 35
+  },
+  {
+    "idAlumno": "A003",
+    "nombre": "Carlos",
+    "edad": 22
+  }
+]
+
+------------------------------------------------
+CONCEPTOS USADOS EN MONGODB(NOSQL) VS MYSQL(SQL)
+------------------------------------------------
+
+			 MONGODB(NOSQL)                         MYSQL(SQL)
+DataBase   : Conjunto de  Collections				DataBase : Conjunto de Tables (Tablas)      
+Document   : Conjunto clave-valor                   Registro : Conjunto de Fields (Campos)       
+Collection : Conjunto de Documents                  Tabla    : Conjunto de Rows   (Filas)
+
+---------------------------------------------------
+PASOS A SEGUIR PARA CREAR UNA BASE DE DATOS MONGODB
+---------------------------------------------------
+
+Primero se crea la base de datos.
+Luego se crea la coleccion.
+Por último se crea los documentos que tendra nuestra colección.
+
+use("fabrica")
+
+db.trabajador.drop()
+
+db.trabajador.insertMany([
+{
+    "idTrabajador": 1,
+    "nombre": "Miguel",
+    "edad": 22,
+    "sueldo": 1200.54,
+    "direcciones": [{"Calle": "De La Sierva", "numero": 123, "ciudad": "Trujillo"}, {"Calle": "Alberto Guzman", "numero": 894, "ciudad": "Trujillo"}],
+    "telefonos": ["634649847", "645234123"],
+    "emails": ["miguel.a@hotmail.com", "miguel.b@gmail.com"],
+    "jobis": ["Futbol", "Televisión"]
+},
+{
+    "idTrabajador": 2,
+    "nombre": "Carlos",
+    "edad": 24,
+    "sueldo": 1100.78,
+    "direcciones": [{"Calle": "Juan Cipriani", "numero": 534, "ciudad": "Piura"}],
+    "telefonos": ["635645557"],
+    "emails": ["carlos.a@hotmail.com", "carlos.b@gmail.com"],
+    "jobis": ["Video Juegos", "Cartas", "Televisión"]
+}
+{
+    "idTrabajador": 3,
+    "nombre": "Carmen",
+    "edad": 21,
+    "sueldo": 1000.00,
+    "direcciones": [{"Calle": "Guillermo Marconi", "numero": 353, "ciudad": "Tumbes"}],
+    "telefonos": ["635645333", "634749293"],
+    "emails": ["carmen.a@hotmail.com", "carmen.b@gmail.com"],
+    "jobis": ["Peliculas", "Televisión", "Lectura"]
+}
+])
+
+-----------------
+MONGODB EN VSCODE
+-----------------
+
+Instalar la extensión "MongoDB for VS Code" (1.png)
+Debemos cerrar y volver abrir vscode para que la instalación se haga correctamente(necesario).
+Esta extensión tiene una hoja color verde como icono.
+Una vez instalada la extensión aparece en lateral derecho el icono hoja verde.
+
+--------------------------------------------------
+RESUMEN DE COMANDOS PARA REALIZAR OPERACIONES CRUD
+--------------------------------------------------
+
+(01)
+
+CREATE
+
+insertOne(data,options)
+insertMany(data,options)
+
+READ
+
+find(filter,options)
+findOne(filter,options)
+
+UPDATE
+
+updateOne(filter,data,options)
+updateMany(filter,data,options)
+replaceOne(filter,data,options)
+
+DELETE
+
+deleteOne(filter,options)
+deleteMany(filter,options)
+
+(02)
+
+READ
+
+show dbs
+use fabrica
+show collections
+db.trabajador.find()
+
+CREATE
+
+db.trabajador.insertOne({nombre: "Ana", bebida: "Chocolate con Menta"})      
+(Podemos insertar documentos no estructurados es decir que no siguen la misma estructura de los documentos anteriores)
+
+db.trabajador.find()                                                         
+(Mostramos todos los documentos, se muestran el primero en entrar es el primero en salir)
+
+UPDATE
+
+db.trabajador.updateOne(
+   {
+     nombre: "Jhon"
+   },
+   {
+     $set:{etiqueta: "Atendido"}
+   }
+)      
+(El campo etiqueta no existe entonces al no existir se crea)
+                                                                                        (Busca el primer documento que encuentre por ser updateOne con la clave nombre y valor Jhon entonce le crea dicha clave con su valor sólo al primer documento que encuentra)
+cafeteria02> db.tipoCafe.find()
+																						
+DELETE
+
+cafeteria02> db.tipoCafe.deleteOne({_id: 1})  (Elimina sólo el primer documento que encuentre que tenga la clave _id con el valor 1)
+cafeteria02> db.tipoCafe.find()
+
+cafeteria02> db.tipoCafe.deleteOne({_id: "Nuevo Id"})
+cafeteria02> db.tipoCafe.find()
+
+cafeteria02> db.tipoCafe.deleteMany({})       (Eliminar todos los documentos de una colección)
+cafeteria02> db.tipoCafe.find()               (Mostrar todos los documentos de una colección)

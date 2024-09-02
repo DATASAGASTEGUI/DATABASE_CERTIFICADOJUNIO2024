@@ -1,0 +1,19 @@
+input[type=text] {
+    text-align: center;
+    border-radius: 5px;
+    width: 25px;
+    font-family: Courier New;
+    border: 2px solid blue;
+    font-size: 12px;
+    background-color: yellow;
+}
+h1 {
+    color: red;
+    font-family: Courier New;
+    font-size: 16px;
+}
+
+div {
+    text-align: center;
+}
+

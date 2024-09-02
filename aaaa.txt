@@ -1,0 +1,20 @@
+RELACIONES ENTRE TABLAS
+-----------------------
+RELACION DE UNO A UNO
+RELACION DE UNO A MUCHOS
+RELACION DE MUCHOS A MUCHOS (SE ROMPE CON UNA TERCERA TABLA)
+
+
+ALUMNO                  ASIGNATURA
+------                  ----------
+idAlumno                idAsignatura
+nombre                  descripcion
+                        creditos
+
+
+ALUMNO        ASIGNATURA
+1             1
+              *
+
+1             1
+*

@@ -1,0 +1,43 @@
+use("campusfp");
+db.alumno.drop();
+db.alumno.insertOne({
+  idAlumno: "A1",
+  nombre: "Miguel",
+  edad: 23,
+  estatura: 1.72,
+});
+db.alumno.insertOne({
+  idAlumno: "A2",
+  nombre: "Luis",
+  edad: 25,
+  estatura: 1.8,
+});
+db.alumno.insertOne({
+  idAlumno: "A3",
+  nombre: "Maria",
+  edad: 20,
+  estatura: 1.72,
+});
+db.alumno.insertOne({
+  idAlumno: "A4",
+  nombre: "Pablo",
+  edad: 33,
+  estatura: 1.95,
+});
+db.alumno.insertOne({
+  idAlumno: "A5",
+  nombre: "Jorge",
+  edad: 31,
+  estatura: 1.78,
+});
+db.alumno.insertOne({
+  idAlumno: "A6",
+  nombre: "Jorge",
+});
+
+db.alumno.insertOne({
+  idAlumno: "A7",
+  nombre: "Luis",
+  edad: 32,
+  estatura: 1.75,
+});

@@ -1,0 +1,69 @@
+/*
+(01) INSERTAR UN REGISTRO
+*/
+
+// NO PERMITIDO PORQUE EL _ID YA EXISTE
+
+use("fabrica")
+db.trabajador.insertOne(
+{
+    "_id": 1,
+    "nombre": "Delly",
+    "edad": 22,
+    "sueldo": 1200.54,
+    "direcciones": [{"Calle": "De La Sierva", "numero": 123, "ciudad": "Trujillo"}, {"Calle": "Alberto Guzman", "numero": 894, "ciudad": "Trujillo"}],
+    "telefonos": ["634649847", "645234123"],
+    "emails": ["miguel.a@hotmail.com", "miguel.b@gmail.com"],
+    "jobis": ["Futbol", "Televisión"]
+})
+
+/*
+El valor para _id le asignaremos de manera manual y debe ser único.
+El valor de _id debe ser único por lo que si intentamos insertar otro documento con el mismo valor en _id nos arrojara un error de duplicidad de key
+*/
+
+// ESTA PERMITIDO AUN QUE EL _ID SEA UN TEXTO Y NO NUMERICO CON LOS ANTERIORES
+
+use("fabrica")
+db.trabajador.insertOne(
+{
+    "_id": "A3",
+    "nombre": "Delly",
+    "edad": 22,
+    "sueldo": 1200.54,
+    "direcciones": [{"Calle": "De La Sierva", "numero": 123, "ciudad": "Trujillo"}, {"Calle": "Alberto Guzman", "numero": 894, "ciudad": "Trujillo"}],
+    "telefonos": ["634649847", "645234123"],
+    "emails": ["miguel.a@hotmail.com", "miguel.b@gmail.com"],
+    "jobis": ["Futbol", "Televisión"]
+})
+
+/*
+(02) DELETE
+*/
+
+// ELIMINAR EL DOCUMENTO CON _ID IGUAL A 1  
+
+use("fabrica")
+db.trabajador.deleteOne({_id: 1})  //Sólo elimina el primer documento que encuentre con el valor _id igual a 1
+db.trabajador.find(
+    {},
+    {
+        nombre: 1
+    }
+)
+
+// ELIMINAR TODOS LOS DOCUMENTOS DE UNA COLECCION
+
+use("fabrica")
+db.trabajador.deleteMany({})       
+
+use("fabrica")
+db.trabajador.find()
+
+// ELIMINAR TODOS LOS DOCUMENTOS QUE TENGAN LA CLAVE EDAD CON EL VALOR 20
+
+use("fabrica")
+db.trabajador.deleteMany({edad: 21})       
+
+use("fabrica")
+db.trabajador.find({},{edad: 1})

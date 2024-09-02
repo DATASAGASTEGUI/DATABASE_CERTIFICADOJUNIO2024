@@ -1,0 +1,142 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"campusfp1"},
+{"type":"table","name":"alumno","database":"campusfp1","data":
+[
+{"idAlumno":"1","nombre":"Carlos","apellidos":"Ledezma Perez","grupo":"dam","fechaNacimiento":"2020-01-15"},
+{"idAlumno":"2","nombre":"Miguel","apellidos":"Ruíz Párraga","grupo":"daw","fechaNacimiento":"2021-02-13"},
+{"idAlumno":"3","nombre":"Luis","apellidos":"Goycochea Ruíz","grupo":"dam","fechaNacimiento":"2019-03-18"},
+{"idAlumno":"4","nombre":"Carmen","apellidos":"Roncal Jauregui","grupo":"daw","fechaNacimiento":"2020-04-15"},
+{"idAlumno":"5","nombre":"Lucho","apellidos":"Diez Rodriguez","grupo":"dam","fechaNacimiento":"2021-10-31"},
+{"idAlumno":"6","nombre":"Lucia","apellidos":"Rodriguez Jauregui","grupo":"dam","fechaNacimiento":"2021-03-25"},
+{"idAlumno":"7","nombre":"Vanessa","apellidos":"Perez Cuba","grupo":"daw","fechaNacimiento":"2019-12-17"},
+{"idAlumno":"8","nombre":"Arturo","apellidos":"Ledezma Perez","grupo":"dam","fechaNacimiento":"2020-10-16"}
+]
+}
+{"type":"database","name":"campusfp2"},
+,{"type":"table","name":"alumno","database":"campusfp2","data":
+[
+{"idAlumno":"1","nombre":"Carlos","apellidos":"Ledezma Perez","grupo":"dam","fechaNacimiento":"2020-01-15"},
+{"idAlumno":"2","nombre":"Miguel","apellidos":"Ruíz Párraga","grupo":"daw","fechaNacimiento":"2021-02-13"},
+{"idAlumno":"3","nombre":"Luis","apellidos":"Goycochea Ruíz","grupo":"dam","fechaNacimiento":"2019-03-18"},
+{"idAlumno":"4","nombre":"Carmen","apellidos":"Roncal Jauregui","grupo":"daw","fechaNacimiento":"2020-04-15"},
+{"idAlumno":"5","nombre":"Lucho","apellidos":"Diez Rodriguez","grupo":"dam","fechaNacimiento":"2021-10-31"},
+{"idAlumno":"6","nombre":"Lucia","apellidos":"Rodriguez Jauregui","grupo":"dam","fechaNacimiento":"2021-03-25"},
+{"idAlumno":"7","nombre":"Vanessa","apellidos":"Perez Cuba","grupo":"daw","fechaNacimiento":"2019-12-17"},
+{"idAlumno":"8","nombre":"Arturo","apellidos":"Ledezma Perez","grupo":"dam","fechaNacimiento":"2020-10-16"}
+]
+}
+{"type":"database","name":"gestionpedidoscrud"},
+,{"type":"table","name":"cliente","database":"gestionpedidoscrud","data":
+[
+{"id":"10","nombre":"Pablo","telefono":"635371354","fecha":"27\/11\/05","email":"david10@mydevteacher.com"},
+{"id":"11","nombre":"Alejandro","telefono":"630259849","fecha":"31\/10\/03","email":"david11@mydevteacher.com"},
+{"id":"12","nombre":"Jose","telefono":"625148344","fecha":"15\/02\/02","email":"david12@mydevteacher.com"},
+{"id":"13","nombre":"Cristina","telefono":"620036839","fecha":"04\/04\/99","email":"david13@mydevteacher.com"},
+{"id":"14","nombre":"Victor","telefono":"614925334","fecha":"30\/01\/97","email":"david14@mydevteacher.com"},
+{"id":"15","nombre":"Carlos","telefono":"609813829","fecha":"04\/01\/94","email":"david15@mydevteacher.com"},
+{"id":"16","nombre":"Sergio","telefono":"604702324","fecha":"26\/12\/91","email":"david16@mydevteacher.com"},
+{"id":"17","nombre":"David","telefono":"644555999","fecha":"19\/01\/78","email":"consabro@hotmail.com"},
+{"id":"18","nombre":"David","telefono":"644555999","fecha":"19\/01\/78","email":"consabro@hotmail.com"},
+{"id":"19","nombre":"Dani","telefono":"660928879","fecha":"08\/02\/16","email":"david5@mydevteacher.com"},
+{"id":"20","nombre":"manolito","telefono":"666040384","fecha":"17\/09\/17","email":"david4@mydevteacher.com"}
+]
+}
+{"type":"database","name":"phpmyadmin"},
+,{"type":"table","name":"pma__bookmark","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__central_columns","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__column_info","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__designer_settings","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__export_templates","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__favorite","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__history","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__navigationhiding","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__pdf_pages","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__recent","database":"phpmyadmin","data":
+[
+{"username":"root","tables":"[{\"db\":\"\",\"table\":\"Alumno\"},{\"db\":\"\",\"table\":\"alumno\"},{\"db\":\"gestionpedidoscrud\",\"table\":\"cliente\"},{\"db\":\"mysql\",\"table\":\"columns_priv\"},{\"db\":\"gestionpedidoscrud\",\"table\":\"proveedores\"}]"}
+]
+}
+,{"type":"table","name":"pma__relation","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__savedsearches","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__table_coords","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__table_info","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__table_uiprefs","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__tracking","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__userconfig","database":"phpmyadmin","data":
+[
+{"username":"root","timevalue":"2024-09-02 09:42:08","config_data":"{\"Console\\\/Mode\":\"collapse\",\"lang\":\"es\"}"}
+]
+}
+,{"type":"table","name":"pma__usergroups","database":"phpmyadmin","data":
+[
+
+]
+}
+,{"type":"table","name":"pma__users","database":"phpmyadmin","data":
+[
+
+]
+}
+{"type":"database","name":"test"},
+]

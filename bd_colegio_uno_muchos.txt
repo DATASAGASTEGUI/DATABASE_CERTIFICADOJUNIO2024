@@ -1,0 +1,35 @@
+CREATE DATABASE IF NOT EXISTS `COLEGIO` DEFAULT CHARACTER SET utf8 ;
+USE `COLEGIO` ;
+
+-- -----------------------------------------------------
+-- Table `COLEGIO`.`Departamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `COLEGIO`.`Departamento` (
+  `idDepartamento` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idDepartamento`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `COLEGIO`.`Empleado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `COLEGIO`.`Empleado` (
+  `idEmpleado` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `telefono` VARCHAR(45) NULL,
+  `idDepartamento` INT NOT NULL,
+  PRIMARY KEY (`idEmpleado`),
+  UNIQUE INDEX `telefono_UNIQUE` (`telefono` ASC) VISIBLE,
+  INDEX `fk_Empleado_Departamento_idx` (`idDepartamento` ASC) VISIBLE,
+  CONSTRAINT `fk_Empleado_Departamento`
+    FOREIGN KEY (`idDepartamento`)
+    REFERENCES `COLEGIO`.`Departamento` (`idDepartamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

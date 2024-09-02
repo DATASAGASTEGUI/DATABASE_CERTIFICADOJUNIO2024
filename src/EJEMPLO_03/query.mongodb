@@ -1,0 +1,38 @@
+/*
+(01) MOSTRAR TODOS LOS DOCUMENTOS DE UNA COLECCION
+*/
+
+use("campusfp")
+db.alumno.find();
+
+/*
+(02) ELIMINAR UNA BASE DE DATOS
+*/
+
+use("campusfp")
+db.dropDatabase()
+
+/*
+(03) MOSTRAR TODAS LAS BASES DE DATOS
+*/
+
+show databases
+
+db.getMongo().getDBs()
+
+/*
+(04) BUSCAR UN DOCUMENTO EN UNA COLECCION
+*/
+
+use("campusfp")
+db.alumno.find(
+    {idAlumno: "A3"},
+    {idAlumno: 1, nombre: 1, _id:0}
+)
+
+use("campusfp")
+db.alumno.find(
+    {idAlumno: "A6"}
+)
+
+
